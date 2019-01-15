@@ -4,27 +4,19 @@
   "description": "making audio/visual with react and tone.js",
   "main": "''",
   "scripts": {
-    "dev": "NODE_ENV=dev webpack-dashboard -- nodemon --exec babel-node server/server.js --ignore public/ --ignore src/",
+    "dev": "webpack-dev-server --config ./webpack.dev.config.js",
     "prebuild": "rimraf public",
-    "build:client": "webpack -d --config webpack.prod.config.js --colors",
-    "build:server": "webpack --config webpack.server.config.js -p",
-    "build": "npm-run-all build:*",
-    "start": "node public/server.js",
+    "build": "webpack -d --config webpack.prod.config.js --colors",
+    "start": "serve public/",
     "predeploy": "npm run build",
-    "deploy": "./deploy.sh"
+    "deploy": "gh-pages -d public"
   },
   "author": "Vibert Thio",
   "license": "MIT",
   "dependencies": {
     "@tweenjs/tween.js": "17.1.1",
-    "axios": "^0.17.1",
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
     "image-size-loader": "^0.7.0",
     "keymaster": "^1.6.2",
-    "lodash": "^4.17.4",
-    "mongodb": "^2.2.27",
-    "mongoose": "^4.10.3",
     "prop-types": "^15.5.10",
     "react": "16.1.0",
     "react-dom": "16.1.0",
@@ -39,7 +31,6 @@
     "babel-core": "^6.23.1",
     "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
-    "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.22.0",
@@ -61,8 +52,6 @@
     "gh-pages": "^1.0.0",
     "html-webpack-plugin": "^2.26.0",
     "imports-loader": "^0.7.1",
-    "lodash-webpack-plugin": "^0.11.4",
-    "nodemon": "^1.11.0",
     "npm-run-all": "4.1.2",
     "postcss-loader": "^2.0.8",
     "react-hot-loader": "^3.0.0-beta.6",
@@ -75,6 +64,7 @@
     "webpack-cleanup-plugin": "^0.5.1",
     "webpack-dashboard": "^1.0.2",
     "webpack-dev-middleware": "^1.11.0",
+    "webpack-dev-server": "2.4.5",
     "webpack-hot-middleware": "^2.13.2"
   }
 }

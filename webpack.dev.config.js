@@ -3,11 +3,14 @@ var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var DashboardPlugin = require('webpack-dashboard/plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+// Dashboard
+const Dashboard = require('webpack-dashboard');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const dashboard = new Dashboard();
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
@@ -25,7 +28,7 @@ loaders.push({
 
 module.exports = {
   entry: [
-		'webpack-hot-middleware/client',
+		// 'webpack-hot-middleware/client',
     'react-hot-loader/patch',
     './src/index.js', // your app's entry point
   ],
@@ -51,14 +54,13 @@ module.exports = {
   },
   plugins: [
     new BundleAnalyzerPlugin(),
-		new LodashModuleReplacementPlugin,
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',
       allChunks: true
     }),
-    new DashboardPlugin(),
+		new DashboardPlugin(dashboard.setData),
     new HtmlWebpackPlugin({
       title: 'Beact (dev)',
       template: './src/template.html',

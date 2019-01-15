@@ -141,20 +141,6 @@ function Animation() {
     setKeyAnimation();
   };
 
-  const startNaruto = () => {
-    currentKeyAnimationsIndex = 1;
-    reset();
-    setSequencerAnimations();
-    setKeyAnimation();
-  };
-
-	const startNormal = () => {
-    currentKeyAnimationsIndex = 0;
-    reset();
-    setSequencerAnimations();
-    setKeyAnimation();
-  };
-
   setSequencerAnimations();
   setKeyAnimation();
 
@@ -164,8 +150,6 @@ function Animation() {
     changeSequencerAnimations,
 		changeKeyAnimations,
     resize,
-    startNaruto,
-		startNormal,
     setSequencerAnimationsCustomSettings,
   };
 }

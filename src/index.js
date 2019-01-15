@@ -18,20 +18,11 @@ if (module.hot) {
   );
 
   module.hot.addStatusHandler((status) => {
-    // React to the current status...
     console.log(`status : ${status}`);
   });
 
   module.hot.accept('./components/DrumMachine', () => {
     window.location.reload(true);
-    console.log('test');
-    // const NewApp = require('./components/App').default;
-    // render(
-    //   <AppContainer>
-    //     <NewApp />
-    //   </AppContainer>,
-    //   rootElement,
-    // );
   });
 } else {
   app = <DrumMachine />;

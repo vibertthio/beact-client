@@ -6,7 +6,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 loaders.push({
 	test: /\.jsx?$/,
@@ -38,7 +37,6 @@ module.exports = {
     loaders
   },
   plugins: [
-		new LodashModuleReplacementPlugin,
     new WebpackCleanupPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -71,7 +69,6 @@ module.exports = {
       { from: 'src/assets/audio', to: 'assets/audio' },
       { from: 'src/assets/images/logo.png' },
       { from: 'src/assets/images/ico/flash.ico' },
-			{ from: 'src/assets/images/animations/yuen/bg.jpg' },
     ]),
   ]
 };

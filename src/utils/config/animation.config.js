@@ -39,43 +39,12 @@ import fade from 'animations/vapor/fade';
 import gradientTimer from 'animations/vapor/gradientTimer';
 import randomPiston from 'animations/vapor/randomPiston';
 
-// scya
-import crossline from 'animations/scyaAni/scya-crossline';
-import firework from 'animations/scyaAni/scya-firework';
-import doubleImage from 'animations/naruto/doubleImage';
-
 /******
 Image import
 ******/
 // vapor
 import landscape from 'vapor/landscape.png';
 import sculpture from 'vapor/sculpture-02.png';
-
-// naruto
-import n1 from 'naruto/01.png';
-import n1b from 'naruto/01-b.jpg';
-import n2 from 'naruto/02.png';
-import n2b from 'naruto/02-b.jpg';
-import n3 from 'naruto/03.png';
-import n3b from 'naruto/03-b.jpg';
-import n4 from 'naruto/04.png';
-import n4b from 'naruto/04-b.jpg';
-import n5 from 'naruto/05.png';
-import n5b from 'naruto/05-b.jpg';
-import n6 from 'naruto/06.png';
-import n6b from 'naruto/06-b.jpg';
-import n7 from 'naruto/07.png';
-import n7b from 'naruto/07-b.jpg';
-import n8 from 'naruto/08.png';
-import n8b from 'naruto/08-b.jpg';
-import n9 from 'naruto/09.png';
-import n9b from 'naruto/09-b.jpg';
-import n10 from 'naruto/10.png';
-import n10b from 'naruto/10-b.jpg';
-import n11 from 'naruto/11.png';
-import n11b from 'naruto/11-b.jpg';
-import n12 from 'naruto/12.png';
-import n12b from 'naruto/12-b.jpg';
 
 // yuen
 import bg from 'yuen/bg.jpg';
@@ -109,19 +78,7 @@ const sequencerAnimationsSet = [
     { animation: randomPiston },
     { animation: splashColorful },
   ],
-  // [
-  //   [
-  //     { animation: fade, options: [0] },
-  //     { animation: singleStaticImage, options: [heart, 0.8, 0.4] },
-  //   ],
-  //   { animation: singleFlashImage, options: [cube, 0.9, 0.3] },
-  //   { animation: gradientTimer },
-  //   { animation: prism, options: [3] },
-  //   { animation: prism, options: [7] },
-  //   { animation: sunset },
-  //   { animation: strikes },
-  //   { animation: brush, options: [4] },
-  // ],
+
   [
     { animation: flashImage, options: [landscape, 0.8] },
     { animation: popImage, options: [sculpture, 4.5] },
@@ -200,34 +157,6 @@ const keyAnimationsSet = [
     { animation: splash },
     { animation: wipe },
   ],
-	[
-		{ animation: doubleImage, options: [[n1b, n1]]},
-    { animation: doubleImage, options: [[n2b, n2]]},
-    { animation: doubleImage, options: [[n3b, n3]]},
-    { animation: doubleImage, options: [[n4b, n4]]},
-    { animation: doubleImage, options: [[n5b, n5]]},
-    { animation: doubleImage, options: [[n6b, n6]]},
-    { animation: doubleImage, options: [[n7b, n7]]},
-    { animation: doubleImage, options: [[n8b, n8]]},
-		{ animation: doubleImage, options: [[n9b, n9]]},
-    { animation: doubleImage, options: [[n10b, n10]]},
-    { animation: doubleImage, options: [[n11b, n11]]},
-    { animation: doubleImage, options: [[n12b, n12]]},
-		{ animation: doubleImage, options: [[n1b, n1]]},
-    { animation: doubleImage, options: [[n2b, n2]]},
-    { animation: doubleImage, options: [[n3b, n3]]},
-    { animation: doubleImage, options: [[n4b, n4]]},
-    { animation: doubleImage, options: [[n5b, n5]]},
-    { animation: doubleImage, options: [[n6b, n6]]},
-    { animation: doubleImage, options: [[n7b, n7]]},
-    { animation: doubleImage, options: [[n8b, n8]]},
-		{ animation: doubleImage, options: [[n9b, n9]]},
-    { animation: doubleImage, options: [[n10b, n10]]},
-    { animation: doubleImage, options: [[n11b, n11]]},
-    { animation: doubleImage, options: [[n12b, n12]]},
-		{ animation: doubleImage, options: [[n1b, n1]]},
-    { animation: doubleImage, options: [[n2b, n2]]},
-	],
 ];
 
 
