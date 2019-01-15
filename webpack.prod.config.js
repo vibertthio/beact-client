@@ -18,7 +18,7 @@ module.exports = {
     './src/index.js',
   ],
   output: {
-    publicPath: '/',
+    publicPath: './',
     path: path.join(__dirname, 'public'),
     filename: '[chunkhash].bundle.js',
   },
