@@ -2,10 +2,10 @@
 
 <!-- ![logo of beact](./assets/images/bar.png) -->
 ![logo of beact](./assets/images/new-ani.png)
-# [Beact](https://beact.herokuapp.com/) &middot; [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+# [Beact](https://vibertthio.com/beact-client/) &middot; [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 > 🎸🎨 DJ / VJ all by yourself in seconds !
-- [demo](https://beact.herokuapp.com/) - It's deployed on Heroku, play it now!
+- [demo](https://vibertthio.com/beact-client/) - It's deployed on Heroku, play it now!
 - [video](https://vimeo.com/226318485) - Short video of using Beact for performance!
 
 An audio/visual interactive art piece, and an instrument that everyone play with to become a DJ + VJ.
@@ -16,7 +16,7 @@ I have added some my own animation and will do more to replace ones from patatap
 
 ## 1. Quick Start
 
-1.   open the [demo](https://safe-stream-69256.herokuapp.com/) link.
+1.   open the [demo](https://vibertthio.com/beact-client/) link.
 2.   press space to start/stop.
 3.   click any block to trigger drum machine note.
 4.   press any alphabet to trigger keyboard note.
