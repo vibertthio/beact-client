@@ -1,18 +1,58 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = [
-  {
-    test: /\.css$/,
-    use: [
-      { loader: 'style-loader' },
-      {
-        loader: 'css-loader?url=false',
-        options: {
-          module: true,
-          localIdentName: '[name]__[local]--[hash:base64:5]',
-        },
-      },
-    ],
-    exclude: ['node_modules']
-  },
+  // {
+  //   test: /\.css$/,
+  //   use: [
+  //     { loader: 'style-loader' },
+  //     {
+  //       loader: 'css-loader?url=false',
+  //       options: {
+  //         module: true,
+  //         localIdentName: '[name]__[local]--[hash:base64:5]',
+  //       },
+  //     },
+  //   ],
+  //   exclude: ['node_modules']
+	// },
+	{
+		test: /\.css$/,
+		use: ExtractTextPlugin.extract({
+			fallback: 'style-loader',
+			use: [
+				{
+					loader: 'css-loader',
+					query: {
+						modules: true,
+						sourceMap: true,
+						localIdentName: '[name]__[local]___[hash:base64:5]',
+					},
+				},
+				'postcss-loader',
+			],
+		}),
+		exclude: ['node_modules'],
+	},
+	{
+		test: /\.scss$/,
+		exclude: /node_modules/,
+		use: ExtractTextPlugin.extract({
+			fallback: 'style-loader',
+			use: [
+				{
+					loader: 'css-loader',
+					query: {
+						modules: true,
+						sourceMap: true,
+						importLoaders: 2,
+						localIdentName: '[name]__[local]___[hash:base64:5]',
+					},
+				},
+				'postcss-loader',
+				'sass-loader',
+			],
+		}),
+	},
   {
     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
     exclude: /(node_modules|bower_components)/,

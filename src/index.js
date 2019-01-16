@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import DrumMachine from './components/DrumMachine';
-import './index.css';
+import './index.scss';
 
 injectTapEventPlugin();
 

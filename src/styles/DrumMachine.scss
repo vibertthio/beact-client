@@ -1,0 +1,266 @@
+$hint-color: #4c1865;
+$menu-color: #eecdcc;
+
+.dimming {
+  animation-name: dim;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+
+  @keyframes dim {
+    0%   { opacity: 0.3; }
+    50%  { opacity: 1.0; }
+    100% { opacity: 0.3; }
+  }
+}
+
+.hideDOM {
+  display: none;
+}
+
+.showDOM {
+  height: 100%;
+}
+
+#hintMask {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  #hintContainer {
+    @extend .dimming;
+    max-width: 500px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    background-color: $hint-color;
+    text-align: center;
+    
+    h3 {
+      font-weight: 700;
+      letter-spacing: 0.2rem;
+      font-size: 1.3rem;
+      margin: 0.7rem auto;
+      line-height: 2rem;
+
+      @media screen and (max-width: 1300px) {
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+      }
+    }
+    p {
+      letter-spacing: 0.1rem;
+      font-size: 1.0rem;
+      margin: 0.3rem;
+    }
+  }
+
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  z-index: 2;
+}
+
+.icon > img {
+  width: 25px;
+  height: 25px;
+}
+
+.icon:hover {
+  border-radius: 50%;
+  background-color: #b1788f;
+}
+
+.menuIcon {
+  top: 2em;
+  left: 2.6em;
+}
+
+.toggleIcon {
+  top: 5em;
+  left: 2.5em;
+}
+
+.clearIcon {
+  top: 1.9em;
+  right: 2em;
+}
+
+.randomIcon {
+  top: 5em;
+  right: 2em;
+}
+
+.displayHide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.menu {
+  position: fixed;
+  display: table;
+  opacity: 0.8;
+  width: 40%;
+  height: 100%;
+  z-index: 1;
+  // background-color: #724a59;
+  background-color: $hint-color;
+  transition: all .7s ease-in-out;
+
+  .menuContent {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    padding: 6rem;
+    margin: 0 auto;
+
+    @media screen and (max-width: 1300px) {
+      padding: 3rem;
+    }
+    @media screen and (max-width: 860px) {
+      padding: 1rem;
+    }
+
+    h1 {
+      font-weight: 700;
+      letter-spacing: 0.4rem;
+      font-size: 2.0rem;
+      margin: 0.7rem auto;
+      margin-top: 3.0rem;
+      line-height: 2rem;
+
+      @media screen and (max-width: 1300px) {
+        margin-top: 1.5rem;
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+      }
+      @media screen and (max-width: 860px) {
+        font-size: 1.0rem;
+        line-height: 1.2rem;
+      }
+    }
+    p {
+      letter-spacing: 0.1rem;
+      font-size: 1.0rem;
+      margin: 0.3rem;
+      line-height: 1.8rem;
+
+      @media screen and (max-width: 1300px) {
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+      }
+      @media screen and (max-width: 860px) {
+        font-size: 0.7rem;
+        line-height: 1.0rem;
+      }
+    }
+  }
+}
+
+
+.toggleMenu {
+  margin-left: 0%;
+}
+
+/* mask */
+
+.mask {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: lightgrey;
+  opacity: 0.3;
+  z-index: 1;
+  transition: margin .7s ease-in-out;
+  border: none;
+  outline: none;
+}
+
+.hideMask {
+  margin-left: 100%;
+}
+
+@media only screen and (min-aspect-ratio: 1/1) {
+  .menu {
+    width: 40%;
+  }
+  .toggleRevMenu {
+    margin-left: -40%;
+  }
+  .mask {
+    width: 60%;
+  }
+  .showMask {
+    margin-left: 40%;
+  }
+}
+
+@media only screen and (max-aspect-ratio: 1/1) {
+  .menu {
+    width: 80%;
+  }
+  .toggleRevMenu {
+    margin-left: -80%;
+  }
+  .mask {
+    width: 20%;
+  }
+  .showMask {
+    margin-left: 80%;
+  }
+}
+
+.menuBtn {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.control {
+  display: flex;
+  width: 20em;
+  margin: 0.3em auto;
+  justify-content: center;
+}
+
+.btn {
+  text-align: center;
+  width: 5em;
+  height: 2em;
+  font-style: italic;
+  margin: 1em;
+  background-color: #eecdcc;
+  padding-top: 0.5em;
+  cursor: pointer;
+}
+
+/* animation */
+
+.animation {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.menuLogo {
+  width: 20%;
+}
+
+/* grid-system */
+
+.subGrid {
+  display: grid;
+  grid-area: 1 / 1 / span 1 / span 10;
+}

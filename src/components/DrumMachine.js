@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import key from 'keymaster';
 
-import styles from '../styles/DrumMachine.css';
+import styles from '../styles/DrumMachine.scss';
 import Matrix from './Matrix';
+import keys from '../utils/Keys';
 import { Sequencer, Keyboard, toBPM, presets } from '../utils/Audio';
 import Animation, { animationKey2IndexMapping } from '../utils/Animation';
 
@@ -16,13 +17,6 @@ import mi6 from '../assets/images/material-icon/ic_shuffle_white_24dp_2x.png';
 
 let fadeoutID;
 let logoID;
-let hintID;
-let keys = '';
-keys = new Array(26);
-for (let i = 0; i < 26; i += 1) {
-	keys[i] = String.fromCharCode(97 + i);
-}
-keys = keys.join(', ');
 
 class DrumMachine extends Component {
   constructor() {
@@ -43,9 +37,9 @@ class DrumMachine extends Component {
       hidden: true,
       wait: true,
       bpm: 120,
-      hover: { i: -1, j: -1 },
-      // idle: false,
-      // currentSample: 'A',
+			hover: { i: -1, j: -1 },
+			instructionStage: 0,
+			keyCount: 0,
     };
 
     this.setCurrentBeat = this.setCurrentBeat.bind(this);
@@ -63,25 +57,14 @@ class DrumMachine extends Component {
     this.toggleHidden = this.toggleHidden.bind(this);
 		this.hideSpinner = this.hideSpinner.bind(this);
 		this.showDOM = this.showDOM.bind(this);
-		this.hideHint = this.hideHint.bind(this);
-		// this.showLogo = this.showLogo.bind(this);
 		this.handleResize = this.handleResize.bind(this);
-
   }
 
   componentDidMount() {
-    this.detectKeyboard();
+		this.detectKeyboard();
     this.ani = Animation();
 
-		/**
-	   * hide loading spinner and wait 3.5s after DOM is loaded.
-	   */
-	  const outShowDOM = this.hideSpinner;
-    // const outShowLogo = this.showLogo;
-		function startTimer() {
-			fadeoutID = window.setTimeout(outShowDOM, 3500);
-		}
-		startTimer();
+		fadeoutID = window.setTimeout(this.hideSpinner, 3500);
 		this.startSequencer();
     window.addEventListener('resize', this.handleResize);
   }
@@ -123,8 +106,11 @@ class DrumMachine extends Component {
 	}
 
   handleClick(i, j) {
+		this.levelTransition(4, 5);
+		this.levelTransition(2, 3);
+
 		const { data } = this.state;
-    data[i][j] = (data[i][j] === 0) ? 1 : 0;
+		data[i][j] = (data[i][j] === 0) ? 1 : 0;
     this.setState({
       data,
     });
@@ -156,12 +142,25 @@ class DrumMachine extends Component {
   }
 
   detectKeyboard() {
+		this.levelTransition(4, 5);
+
     key(keys, (e, h) => {
+			const { keyCount } = this.state;
 			const index = animationKey2IndexMapping[h.shortcut];
       this.ani.triggerKeyAnimation(index);
 			const char = (h.shortcut.charCodeAt(0) - 97).toString();
 			this.keyboard.currentKey = char;
 			this.keyboard.playKey();
+
+			if (keyCount > 4) {
+				this.levelTransition(1, 2);
+			}
+
+			this.levelTransition(0, 1);
+
+			this.setState({
+				keyCount: keyCount + 1,
+			});
     });
 
 		// start / stop
@@ -225,6 +224,9 @@ class DrumMachine extends Component {
 
 		// loading presets
 		key('1, 2, 3, 4, 5, 6, 7, 8', (e, h) => {
+
+			this.levelTransition(3, 4);
+
 			const index = h.shortcut.charCodeAt(0) - 49;
 			const { data } = this.state;
 			for (let i = 0; i < 16; i += 1) {
@@ -244,8 +246,6 @@ class DrumMachine extends Component {
 	hideSpinner() {
 		const spinner = document.getElementById('spinner');
 		spinner.classList.add('loaded');
- 		const loadingTitle = document.getElementById('loadingTitle');
- 		loadingTitle.classList.add('loaded');
 		const logo = document.getElementById('beactLogo');
 		logo.classList.add('showLogo');
 		const showLogo = () => {
@@ -259,41 +259,101 @@ class DrumMachine extends Component {
  	}
 
 	showDOM() {
+		document.getElementById('spinner').style.display = 'none';
+		document.getElementById('beactLogo').style.display = 'none';
+
 		const rootDiv = document.getElementById('root');
 		rootDiv.classList.add('fullHeight');
 		this.setState({ wait: false });
 
     // wait till this time
-    this.ani.setSequencerAnimationsCustomSettings();
-		hintID = window.setTimeout(this.hideHint, 5000);
+		this.ani.setSequencerAnimationsCustomSettings();
+
 	}
 
   toggleHidden() {
+		this.levelTransition(4, 5);
     this.setState({
       hidden: !this.state.hidden,
     });
-  }
+	}
 
-  // eslint-disable-next-line class-methods-use-this
-	hideHint() {
-		const hm = document.getElementById(styles.hintMask);
-		hm.style.display = 'none';
-		window.clearTimeout(hintID);
+	levelTransition(current, next) {
+		const { instructionStage } = this.state;
+		if (instructionStage === current) {
+			this.setState({
+				instructionStage: next,
+			});
+		}
+	}
+
+	tipsText(level) {
+		if (level === 0) {
+			return (
+				<div>
+					{/* <h3>🙋‍♀️Tips</h3> */}
+					{/* <p>🔊Open your speaker.</p> */}
+					{/* <p>🎹Press any key within [a-z] <br />on the keyboard.</p> */}
+					<h3>🎹
+						<br />
+						Press any key in [a-z]
+						<br />
+						on the keyboard
+					</h3>
+				</div>
+			);
+		} else if (level === 1) {
+			return (
+				<div>
+					<h3>👩‍🎤+🤟
+						<br />
+						Type your name or some words
+					</h3>
+				</div>
+			);
+		} else if (level === 2) {
+			return (
+				<div>
+					<h3>🥁+👇
+						<br />
+						Click anywhere to trigger the drums.
+					</h3>
+				</div>
+			);2
+		} else if (level === 3) {
+			return (
+				<div>
+					<h3>🤖+💃
+						<br />
+						press [1-8] to use preset patterns and dance
+					</h3>
+				</div>
+			);
+		} else if (level === 4) {
+			return (
+				<div>
+					<h3>🎉 Awesome
+						<br />
+						press the top-left icon for more info and 🙋‍ tips
+					</h3>
+				</div>
+			);
+		}
 	}
 
   render() {
 		const {
-			data, hover, hidden, wait, playing,
+			data, hover, hidden, wait, playing, instructionStage
 		} = this.state;
     return (
       <div className={(wait === true) ? styles.hideDOM : styles.showDOM}>
-        <div id={styles.hintMask}>
-          <div>
-            <div>1. Open your speaker.</div>
-            <div>2. You can press any keys, arrows, space...</div>
-            <div>3. Click the grids on drum-pad.</div>
+
+        {(instructionStage < 5) ? (<div id={styles.hintMask}>
+					<div id={styles.hintContainer}>
+						{this.tipsText(instructionStage)}
           </div>
-        </div>
+				</div>) : ''}
+
 				<button
 					className={`${styles.icon} ${styles.menuIcon} ${(hidden === true) ? '' : styles.displayHide}`}
 					onTouchTap={() => this.toggleHidden()}
@@ -340,13 +400,31 @@ class DrumMachine extends Component {
 					 ${(hidden === true) ? styles.toggleRevMenu : styles.toggleMenu}`
 				  }
         >
-          <div className={styles.colorMenu}>
-            <div className={`${styles.projectName} ${styles.noFuncRow}`}>
-              <span>Beact</span>
-            </div>
-            <div className={`${styles.contributors} ${styles.noFuncRow}`}>
-              <span>by Vibert, Joey, Scya, 2018</span>
-            </div>
+					<div className={styles.menuContent}>
+						<h1>$Beact$</h1>
+						<p>
+							🎸🎨DJ and VJ all by yourself in seconds !
+              It's made by{' '}
+							<a href="https://vibertthio.com/portfolio/" target="_blank" rel="noreferrer noopener">
+								Vibert Thio
+							</a>
+							{' Source code is on '}
+							<a
+								href="https://github.com/vibertthio/beact-client"
+								target="_blank"
+								rel="noreferrer noopener"
+							>
+								GitHub.
+              </a>
+						</p>
+
+						<h1>$How To Use$</h1>
+						<p>👇[space]: start/stop
+						<br />🎹[a-z]: keyboard effect
+						<br />🥁[click]: trigger drum sequencer
+						<br />💯[1-8]: load preset beat pattern
+						<br />🏃‍♀️[↑↓]: change BPM
+						<br />🔥[←→]: change sound</p>
           </div>
         </div>
 

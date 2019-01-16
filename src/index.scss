@@ -1,3 +1,5 @@
+$font-default: monospace, Arial, sans-serif;
+
 /* open-sans-300 - latin */
 @font-face {
   font-family: 'Open Sans';
@@ -27,8 +29,9 @@
 }
 
 html * {
-  font-family: "Open Sans";
-  font-style: italic;
+  /* font-family: "Open Sans"; */
+  font-family: $font-default;
+  /* font-style: italic; */
   color: #78b19a;
   /*height: 100%;*/
   user-drag: none;
@@ -45,17 +48,19 @@ body {
   /*background-color: #1c3435;*/
   /*background-color: rgba(215, 205, 190, 1);*/
   background-color: rgba(39, 6, 54, 1);
-  font-style: italic;
+  /* font-style: italic; */
   height: 100%;
 }
 
 h1 {
-	font-family: "Open Sans";
-	font-style: italic;
+	/* font-family: "Open Sans"; */
+  font-family: $font-default;
+	/* font-style: italic; */
 	font-variant: normal;
 }
 h3 {
-	font-family: "Open Sans";
+	/* font-family: "Open Sans"; */
+  font-family: $font-default;
 	font-size: 14px;
 	font-style: normal;
 	font-variant: normal;
@@ -63,7 +68,8 @@ h3 {
 	line-height: 15.4px;
 }
 p {
-	font-family: "Open Sans";
+	/* font-family: "Open Sans"; */
+  font-family: $font-default;
 	font-size: 14px;
 	font-style: normal;
 	font-variant: normal;

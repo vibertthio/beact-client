@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uuid4 from 'uuid/v4';
-import styles from '../styles/Matrix.css';
+import styles from '../styles/Matrix.scss';
 import idleDetection from '../utils/IdleDetection';
 
 class Matrix extends Component {
